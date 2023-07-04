@@ -100,17 +100,42 @@ export const successTask = (userName, table) => {
     if (e.target.closest('.success')) {
       const taskRow = e.target.closest('.table-row');
       const id = taskRow.querySelector('.task-id').textContent;
-      console.log(id);
       const data = JSON.parse(localStorage.getItem(userName));
       const updatedData = data.map(item => {
         if (item.id === id) {
-          item.status = 'выполнено';
-          const status = taskRow.querySelector('.status');
-          taskRow.classList.remove('table-light');
-          taskRow.classList.add('table-success');
-          const task = taskRow.querySelector('.task');
-          task.classList.add('text-decoration-line-through');
-          status.innerText = 'выполнено';
+          const btnSuccess = taskRow.querySelector('.success');
+
+          if(item.status === 'выполнено'){
+            btnSuccess.innerText = 'Завершить';
+            item.status = 'в процессе';
+            const status = taskRow.querySelector('.status');
+            taskRow.classList.remove('table-success');
+            
+            if (item.priority === 'important') {
+              taskRow.classList.add('table-warning');
+            } else if (item.priority === 'immediately') {
+              taskRow.classList.add('table-danger');
+            } else {
+              taskRow.classList.add('table-light');
+            }
+
+            const task = taskRow.querySelector('.task');
+            task.classList.remove('text-decoration-line-through');
+            status.innerHTML = `в процессе <span class="task-id" style="display: none;">${item.id}</span>`;
+
+
+          } else {
+            item.status = 'выполнено';
+            btnSuccess.innerText = 'в процессе';
+            const status = taskRow.querySelector('.status');
+            taskRow.classList.remove('table-light', 'table-warning', 'table-danger');
+            taskRow.classList.add('table-success');
+            const task = taskRow.querySelector('.task');
+            task.classList.add('text-decoration-line-through');
+            status.innerHTML = `выполнено <span class="task-id" style="display: none;">${item.id}</span>`;
+          }
+
+          
         }
         return item;
       });

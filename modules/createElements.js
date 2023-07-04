@@ -95,7 +95,12 @@ export const createRow = (item, index) => {
   const completeButton = document.createElement('button');
   completeButton.classList.add('btn', 'btn-success', 'success');
   completeButton.type = 'submit';
-  completeButton.textContent = 'Завершить';
+  if (status === 'выполнено') {
+    completeButton.textContent = 'в процессе';
+  } else {
+    completeButton.textContent = 'Завершить';
+  }
+  
 
   const editButton = document.createElement('button');
   editButton.classList.add('btn', 'btn-warning', 'edit');
