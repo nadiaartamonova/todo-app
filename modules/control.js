@@ -43,13 +43,13 @@ export const todoInputControl = (username, input, taskForm) => {
   const addButton = document.querySelector('.addtask');
 
   input.addEventListener('keyup', (e) => {
-    input.addEventListener('input', updateButtonState(input, addButton));
+    input.addEventListener('input', updateButtonState(input.value, addButton));
     if (e.key === 'Enter') {
       e.preventDefault();
       if (!addButton.disabled) {
         taskFormControl(username, taskForm);
         input.value = '';
-        updateButtonState(input, addButton);
+        updateButtonState(input.value, addButton);
       }
     }
   });
@@ -59,14 +59,14 @@ export const todoInputControl = (username, input, taskForm) => {
     if (!addButton.disabled) {
       taskFormControl(username, taskForm);
       input.value = '';
-      updateButtonState(input, addButton);
+      updateButtonState(input.value, addButton);
     }
   });
 };
 
 // eslint-disable-next-line require-jsdoc
-function updateButtonState(input, addButton) {
-  if (input.value === undefined || input.value.trim() === '') {
+function updateButtonState(value, addButton) {
+  if (value === undefined || value.trim() === '') {
     addButton.disabled = true;
   } else {
     addButton.disabled = false;
@@ -105,12 +105,12 @@ export const successTask = (userName, table) => {
         if (item.id === id) {
           const btnSuccess = taskRow.querySelector('.success');
 
-          if(item.status === 'выполнено'){
+          if (item.status === 'выполнено') {
             btnSuccess.innerText = 'Завершить';
             item.status = 'в процессе';
             const status = taskRow.querySelector('.status');
             taskRow.classList.remove('table-success');
-            
+
             if (item.priority === 'important') {
               taskRow.classList.add('table-warning');
             } else if (item.priority === 'immediately') {
@@ -121,21 +121,20 @@ export const successTask = (userName, table) => {
 
             const task = taskRow.querySelector('.task');
             task.classList.remove('text-decoration-line-through');
-            status.innerHTML = `в процессе <span class="task-id" style="display: none;">${item.id}</span>`;
-
-
+            status.innerHTML = `в процессе 
+            <span class="task-id" style="display: none;">${item.id}</span>`;
           } else {
             item.status = 'выполнено';
             btnSuccess.innerText = 'в процессе';
             const status = taskRow.querySelector('.status');
+            // eslint-disable-next-line max-len
             taskRow.classList.remove('table-light', 'table-warning', 'table-danger');
             taskRow.classList.add('table-success');
             const task = taskRow.querySelector('.task');
             task.classList.add('text-decoration-line-through');
-            status.innerHTML = `выполнено <span class="task-id" style="display: none;">${item.id}</span>`;
+            status.innerHTML = `выполнено 
+            <span class="task-id" style="display: none;">${item.id}</span>`;
           }
-
-          
         }
         return item;
       });

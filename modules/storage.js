@@ -5,9 +5,8 @@ export const getStorage = (key) => {
 };
 
 export const setStorage = (key, value) => {
-  const storageData = getStorage(key);
+  let storageData = getStorage(key);
   if (storageData === null) {
-    // eslint-disable-next-line no-const-assign
     storageData = [value];
   } else {
     storageData.push(value);

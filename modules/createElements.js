@@ -5,12 +5,15 @@ export const createLoginForm = () => {
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Добро пожаловать!<br> Пожалуйста, введите имя пользователя </h5>
+          <h5 class="modal-title">Добро пожаловать!<br>
+            Пожалуйста, введите имя пользователя </h5>
         </div>
         <div class="modal-body">
               
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Имя пользователя:</label>
+            <label for="exampleInputEmail1" class="form-label">
+              Имя пользователя:
+            </label>
             <input type="text" class="form-control" name = "name">
             <div id="emailHelp" class="form-text"> </div>
           </div>
@@ -30,7 +33,10 @@ export const createTaskForm = (userName) => {
     <form class="d-flex align-items-center mb-3">
         <h3>${userName} Todo App</h3>
         <label class="form-group me-3 mb-0">
-          <input type="text" name="task" class="form-control todoinput" placeholder="ввести задачу">
+          <input 
+            type="text" 
+            name="task" 
+            class="form-control todoinput" placeholder="ввести задачу">
         </label>
         <select name="priority">
           <option value="usually">обычная</option>
@@ -100,7 +106,6 @@ export const createRow = (item, index) => {
   } else {
     completeButton.textContent = 'Завершить';
   }
-  
 
   const editButton = document.createElement('button');
   editButton.classList.add('btn', 'btn-warning', 'edit');

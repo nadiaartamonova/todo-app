@@ -1,6 +1,6 @@
 import {createTaskForm, createTable} from './createElements.js';
-// eslint-disable-next-line max-len
-import {todoInputControl, successTask, deleteTask, editTask} from './control.js';
+import
+{todoInputControl, successTask, deleteTask, editTask} from './control.js';
 
 export const render = (userName) => {
   const appContainer = document.querySelector('.app-container');
